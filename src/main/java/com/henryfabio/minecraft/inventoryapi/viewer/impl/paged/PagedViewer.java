@@ -61,9 +61,12 @@ public final class PagedViewer extends ViewerImpl {
         ViewerConfigurationImpl.Paged configuration = this.getConfiguration();
         PagedInventory pagedInventory = (PagedInventory) getCustomInventory();
         Border border = configuration.border();
+
+        // Criamos a nossa variável de Ar para limpar slots
+        InventoryItem airItem = InventoryItem.of(new ItemStack(Material.AIR));
+
         if (this.pageItemList.isEmpty()) {
-            InventoryItem emptyInventoryItem = InventoryItem.of(new ItemStack(Material.AIR));
-            editor.fillCenter(emptyInventoryItem, border);
+            editor.fillCenter(airItem, border);
             editor.setItem(configuration.emptyPageSlot(), DefaultItem.EMPTY.toInventoryItem());
         } else {
             List<InventoryItem> inventoryItems = new LinkedList<>();
@@ -74,9 +77,11 @@ public final class PagedViewer extends ViewerImpl {
             for (int i = 0; i < configuration.itemPageLimit(); i++, pageIndex++) {
                 if (pageIndex < pageMaxIndex) {
                     InventoryItemSupplier itemSupplier = this.pageItemList.get(pageIndex);
-                    if (itemSupplier != null) inventoryItems.add(itemSupplier.get());
+                    // Prevenção extra: se por acaso o itemSupplier for null, mete AIR
+                    inventoryItems.add(itemSupplier != null ? itemSupplier.get() : airItem);
                 } else {
-                    inventoryItems.add(null);
+                    // CORREÇÃO: Usamos o airItem em vez de null para limpar os restos da página anterior!
+                    inventoryItems.add(airItem);
                 }
             }
 
@@ -86,9 +91,10 @@ public final class PagedViewer extends ViewerImpl {
                         pagedInventory.createNextPageItem(this).defaultCallback(event -> nextPage())
                 );
             } else {
+                // CORREÇÃO: Tem de ser nextPageSlot() e usamos airItem para apagar o botão
                 editor.setItem(
-                        configuration.previousPageSlot(),
-                        null
+                        configuration.nextPageSlot(),
+                        airItem
                 );
             }
 
@@ -98,9 +104,10 @@ public final class PagedViewer extends ViewerImpl {
                         pagedInventory.createPreviousPageItem(this).defaultCallback(event -> previousPage())
                 );
             } else {
+                // CORREÇÃO: Usamos airItem em vez de null para apagar o botão
                 editor.setItem(
                         configuration.previousPageSlot(),
-                        null
+                        airItem
                 );
             }
 
