@@ -80,12 +80,15 @@ public final class PagedViewer extends ViewerImpl {
                 }
             }
 
-            editor.fillPage(inventoryItems, border);
-
             if(this.hasNextPage()) {
                 editor.setItem(
                         configuration.nextPageSlot(),
                         pagedInventory.createNextPageItem(this).defaultCallback(event -> nextPage())
+                );
+            } else {
+                editor.setItem(
+                        configuration.previousPageSlot(),
+                        null
                 );
             }
 
@@ -94,7 +97,14 @@ public final class PagedViewer extends ViewerImpl {
                         configuration.previousPageSlot(),
                         pagedInventory.createPreviousPageItem(this).defaultCallback(event -> previousPage())
                 );
+            } else {
+                editor.setItem(
+                        configuration.previousPageSlot(),
+                        null
+                );
             }
+
+            editor.fillPage(inventoryItems, border);
         }
     }
 
