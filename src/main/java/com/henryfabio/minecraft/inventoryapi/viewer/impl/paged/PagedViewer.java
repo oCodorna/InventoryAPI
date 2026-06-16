@@ -77,10 +77,8 @@ public final class PagedViewer extends ViewerImpl {
             for (int i = 0; i < configuration.itemPageLimit(); i++, pageIndex++) {
                 if (pageIndex < pageMaxIndex) {
                     InventoryItemSupplier itemSupplier = this.pageItemList.get(pageIndex);
-                    // Prevenção extra: se por acaso o itemSupplier for null, mete AIR
                     inventoryItems.add(itemSupplier != null ? itemSupplier.get() : airItem);
                 } else {
-                    // CORREÇÃO: Usamos o airItem em vez de null para limpar os restos da página anterior!
                     inventoryItems.add(airItem);
                 }
             }
@@ -91,10 +89,10 @@ public final class PagedViewer extends ViewerImpl {
                         pagedInventory.createNextPageItem(this).defaultCallback(event -> nextPage())
                 );
             } else {
-                // CORREÇÃO: Tem de ser nextPageSlot() e usamos airItem para apagar o botão
+                ItemStack noNext = pagedInventory.createNoNextPageItem(this);
                 editor.setItem(
                         configuration.nextPageSlot(),
-                        airItem
+                        noNext != null ? InventoryItem.of(noNext) : airItem
                 );
             }
 
@@ -104,10 +102,10 @@ public final class PagedViewer extends ViewerImpl {
                         pagedInventory.createPreviousPageItem(this).defaultCallback(event -> previousPage())
                 );
             } else {
-                // CORREÇÃO: Usamos airItem em vez de null para apagar o botão
+                ItemStack noPrev = pagedInventory.createNoPreviousPageItem(this);
                 editor.setItem(
                         configuration.previousPageSlot(),
-                        airItem
+                        noPrev != null ? InventoryItem.of(noPrev) : airItem
                 );
             }
 

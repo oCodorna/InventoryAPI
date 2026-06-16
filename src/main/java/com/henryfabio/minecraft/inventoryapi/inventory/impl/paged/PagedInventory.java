@@ -79,4 +79,18 @@ public abstract class PagedInventory extends CustomInventoryImpl {
         return DefaultItem.PREVIOUS_PAGE.toInventoryItem(viewer);
     }
 
+    /**
+     * Gera o item a ser exibido no slot de "Próxima Página" quando ela não existe.
+     */
+    public ItemStack createNoNextPageItem(@NotNull PagedViewer viewer) {
+        return new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+    }
+
+    /**
+     * Gera o item a ser exibido no slot de "Página Anterior" quando ela não existe.
+     */
+    public ItemStack createNoPreviousPageItem(@NotNull PagedViewer viewer) {
+        return new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+    }
+
 }
