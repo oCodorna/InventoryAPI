@@ -9,7 +9,7 @@ plugins {
 
 
 group = "com.github.oCodorna"
-version = "1.0.3"
+version = "1.0.4"
 
 
 java {
