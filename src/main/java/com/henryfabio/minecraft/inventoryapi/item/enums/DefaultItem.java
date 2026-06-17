@@ -85,8 +85,7 @@ public enum DefaultItem {
             itemStack.setItemMeta(itemMeta);
         }
 
-        return InventoryItem.of(itemStack)
-                .defaultCallback(event -> pagedViewer.nextPage());
+        return InventoryItem.of(itemStack).defaultCallback(event -> pagedViewer.nextPage());
     }),
 
     PREVIOUS_PAGE(viewer -> {
@@ -101,8 +100,7 @@ public enum DefaultItem {
             itemStack.setItemMeta(itemMeta);
         }
 
-        return InventoryItem.of(itemStack)
-                .defaultCallback(event -> pagedViewer.previousPage());
+        return InventoryItem.of(itemStack).defaultCallback(event -> pagedViewer.previousPage());
     });
 
     @Setter private DefaultItemSupplier itemSupplier;

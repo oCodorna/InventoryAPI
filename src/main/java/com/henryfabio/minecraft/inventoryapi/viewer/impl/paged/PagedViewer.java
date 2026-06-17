@@ -89,10 +89,10 @@ public final class PagedViewer extends ViewerImpl {
                         pagedInventory.createNextPageItem(this).defaultCallback(event -> nextPage())
                 );
             } else {
-                ItemStack noNext = pagedInventory.createNoNextPageItem(this);
+                InventoryItem noNext = pagedInventory.createNoNextPageItem(this);
                 editor.setItem(
                         configuration.nextPageSlot(),
-                        noNext != null ? InventoryItem.of(noNext) : airItem
+                        noNext != null ? noNext : airItem
                 );
             }
 
@@ -102,10 +102,10 @@ public final class PagedViewer extends ViewerImpl {
                         pagedInventory.createPreviousPageItem(this).defaultCallback(event -> previousPage())
                 );
             } else {
-                ItemStack noPrev = pagedInventory.createNoPreviousPageItem(this);
+                InventoryItem noPrev = pagedInventory.createNoPreviousPageItem(this);
                 editor.setItem(
                         configuration.previousPageSlot(),
-                        noPrev != null ? InventoryItem.of(noPrev) : airItem
+                        noPrev != null ? noPrev : airItem
                 );
             }
 
