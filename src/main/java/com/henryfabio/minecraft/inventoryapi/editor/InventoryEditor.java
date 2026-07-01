@@ -18,6 +18,8 @@ public interface InventoryEditor {
 
     void setItem(int slot, InventoryItem inventoryItem);
 
+    void setItem(int[] slot, InventoryItem inventoryItem);
+
     void setEmptyItem(int slot);
 
     void fill(InventoryItem inventoryItem);

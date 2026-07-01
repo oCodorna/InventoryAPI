@@ -36,6 +36,21 @@ public abstract class ViewerConfigurationImpl implements ViewerConfiguration {
 
     }
 
+    @Accessors(fluent = true)
+    @Setter @Getter
+    public static class Navigator extends ViewerConfigurationImpl {
+
+        private int itemPageLimit;
+        private Border border;
+        private int emptyPageSlot;
+
+        private int upPageSlot;
+        private int downPageSlot;
+        private int leftPageSlot;
+        private int rightPageSlot;
+
+    }
+
     public static class Global extends ViewerConfigurationImpl {
         // empty implementation
     }

@@ -35,6 +35,13 @@ public final class InventoryEditorImpl implements InventoryEditor {
     }
 
     @Override
+    public void setItem(int[] slot, InventoryItem inventoryItem) {
+        for (int s : slot) {
+            setItem(s, inventoryItem);
+        }
+    }
+
+    @Override
     public void setEmptyItem(int slot) {
         this.inventory.setItem(slot, null);
         this.inventoryCallbackMap.remove(slot);

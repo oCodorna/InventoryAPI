@@ -7,12 +7,6 @@ import com.henryfabio.minecraft.inventoryapi.tests.Main;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.ViewerConfiguration;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.simple.SimpleViewer;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 

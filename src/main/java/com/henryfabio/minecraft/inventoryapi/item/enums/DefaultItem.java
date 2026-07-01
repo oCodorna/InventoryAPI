@@ -7,6 +7,7 @@ import com.henryfabio.minecraft.inventoryapi.item.util.TextUtil;
 import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
+import com.henryfabio.minecraft.inventoryapi.viewer.impl.navigator.NavigatorViewer; // Adicionar import!
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import org.bukkit.Material;
@@ -101,6 +102,66 @@ public enum DefaultItem {
         }
 
         return InventoryItem.of(itemStack).defaultCallback(event -> pagedViewer.previousPage());
+    }),
+
+    NAVIGATOR_UP(viewer -> {
+        if (!(viewer instanceof NavigatorViewer navigatorViewer))
+            throw new UnsupportedOperationException("viewer isn't from navigator inventory");
+
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if (itemMeta != null) {
+            itemMeta.displayName(TextUtil.format("&a⬆ Subir"));
+            itemStack.setItemMeta(itemMeta);
+        }
+
+        return InventoryItem.of(itemStack).defaultCallback(event -> navigatorViewer.moveUp());
+    }),
+
+    NAVIGATOR_DOWN(viewer -> {
+        if (!(viewer instanceof NavigatorViewer navigatorViewer))
+            throw new UnsupportedOperationException("viewer isn't from navigator inventory");
+
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if (itemMeta != null) {
+            itemMeta.displayName(TextUtil.format("&a⬇ Descer"));
+            itemStack.setItemMeta(itemMeta);
+        }
+
+        return InventoryItem.of(itemStack).defaultCallback(event -> navigatorViewer.moveDown());
+    }),
+
+    NAVIGATOR_LEFT(viewer -> {
+        if (!(viewer instanceof NavigatorViewer navigatorViewer))
+            throw new UnsupportedOperationException("viewer isn't from navigator inventory");
+
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if (itemMeta != null) {
+            itemMeta.displayName(TextUtil.format("&a⬅ Esquerda"));
+            itemStack.setItemMeta(itemMeta);
+        }
+
+        return InventoryItem.of(itemStack).defaultCallback(event -> navigatorViewer.moveLeft());
+    }),
+
+    NAVIGATOR_RIGHT(viewer -> {
+        if (!(viewer instanceof NavigatorViewer navigatorViewer))
+            throw new UnsupportedOperationException("viewer isn't from navigator inventory");
+
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        if (itemMeta != null) {
+            itemMeta.displayName(TextUtil.format("&a➡ Direita"));
+            itemStack.setItemMeta(itemMeta);
+        }
+
+        return InventoryItem.of(itemStack).defaultCallback(event -> navigatorViewer.moveRight());
     });
 
     @Setter private DefaultItemSupplier itemSupplier;
@@ -117,5 +178,4 @@ public enum DefaultItem {
     private interface DefaultItemSupplier {
         InventoryItem get(Viewer viewer);
     }
-
 }

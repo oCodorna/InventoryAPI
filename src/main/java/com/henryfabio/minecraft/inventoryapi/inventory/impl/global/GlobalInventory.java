@@ -45,9 +45,8 @@ public abstract class GlobalInventory extends CustomInventoryImpl {
         this.inventoryEditor.updateAllItemStacks();
     }
 
-    // Removido o @NotNull de 'player'
     @Override
-    public final void updateInventory(Player player) {
+    public final void updateInventory(@NotNull Player player) {
         this.updateInventory();
     }
 

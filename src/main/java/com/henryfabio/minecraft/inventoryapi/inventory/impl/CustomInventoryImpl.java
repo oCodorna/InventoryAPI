@@ -98,4 +98,5 @@ public abstract class CustomInventoryImpl implements CustomInventory {
         // empty method
     }
 
+
 }
